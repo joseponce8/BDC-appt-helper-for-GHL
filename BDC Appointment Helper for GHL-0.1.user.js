@@ -5,6 +5,7 @@
 // @description  Extract contact information from HighLevel with daily CSV files and directory persistence
 // @author       Jose Ponce
 // @match        https://app.gohighlevel.com/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=gohighlevel.com
 // @grant        GM_registerMenuCommand
 // @grant        GM_setValue
 // @grant        GM_getValue
