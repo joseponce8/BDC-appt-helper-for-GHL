@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         BDC Appointment Helper for GHL
-// @namespace    
+// @namespace    https://github.com/joseponce8/BDC-appt-helper-for-GHL/releases
 // @version      0.1
 // @description  Extract contact information from HighLevel with daily CSV files and directory persistence
 // @author       Jose Ponce
