@@ -184,7 +184,7 @@
 
         const title = document.createElement('div');
         title.id = 'hl-extractor-title';
-        title.textContent = 'HighLevel Contact Extractor';
+        title.textContent = 'GoHighLevel APPT Helper';
 
         const controls = document.createElement('div');
         controls.id = 'hl-extractor-controls';
@@ -230,7 +230,7 @@
 
         const typeTitle = document.createElement('div');
         typeTitle.className = 'hl-section-title';
-        typeTitle.textContent = 'Appointment Type';
+        typeTitle.textContent = 'Update Type';
 
         const typeGroup = document.createElement('div');
         typeGroup.className = 'hl-radio-group';
