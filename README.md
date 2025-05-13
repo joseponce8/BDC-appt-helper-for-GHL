@@ -21,12 +21,10 @@ Elegir la opcion de TamperMonkey en el menu contextal >> BDC appt helper for GHL
 
 ![image](https://github.com/user-attachments/assets/49823e56-2269-472d-9b8c-3a732739b3c8)
 
-![image](https://github.com/user-attachments/assets/b524a8b7-0d5d-4c49-8e73-07e08bcafe3d)
-
-Toda la informacion relevente sera llenada automaticamente. 
+Toda la informacion relevante sera llenada automaticamente. 
 Completar informacion faltante como fecha y Hora segun haga falta.
 
-4.- Clic Choose directory para el elegir el directory para guardar archivo CSV del update generado
+4.- Clic Choose directory para el elegir el directorio para guardar archivo CSV del update generado
 
 5.- Clic Save & Copy para guardar el resultado y copiar al portapeles.
 
