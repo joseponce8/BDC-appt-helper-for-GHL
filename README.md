@@ -15,7 +15,7 @@ https://github.com/joseponce8/BDC-appt-helper-for-GHL/releases/download/release/
 
 3.- Para ejecutar el UserScript:
 Clic secundario en cualqier parte de la pagina.
-Elegir la opcion de TamperMonkey en el menu contextal >> BDC appt helper for GHL
+Elegir la opcion de TamperMonkey en el menu contextual >> BDC appt helper for GHL.
 
 ![image](https://github.com/user-attachments/assets/425f3e41-b840-4edc-a80d-a4bb38647f7a)
 
@@ -24,7 +24,7 @@ Elegir la opcion de TamperMonkey en el menu contextal >> BDC appt helper for GHL
 Toda la informacion relevante sera llenada automaticamente. 
 Completar informacion faltante como fecha y Hora segun haga falta.
 
-4.- Clic Choose directory para el elegir el directorio para guardar archivo CSV del update generado
+4.- Clic Choose directory para el elegir el directorio para guardar archivo CSV del update generado.
 
 5.- Clic Save & Copy para guardar el resultado y copiar al portapeles.
 
