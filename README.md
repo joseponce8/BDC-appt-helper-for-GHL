@@ -13,7 +13,7 @@ https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmp
 https://github.com/joseponce8/BDC-appt-helper-for-GHL/releases/download/release/BDC.Appointment.Helper.for.GHL-0.1.user.js
 ![image](https://github.com/user-attachments/assets/84abac38-4644-47ce-97df-4bf42d8aaa39)
 
-3.- Para ejecutar El UserScript:
+3.- Para ejecutar el UserScript:
 Clic secundario en cualqier parte de la pagina.
 Elegir la opcion de TamperMonkey en el menu contextal >> BDC appt helper for GHL
 
