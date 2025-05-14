@@ -185,7 +185,7 @@
 
         const title = document.createElement('div');
         title.id = 'hl-extractor-title';
-        title.textContent = 'GoHighLevel APPT Helper';
+        title.textContent = 'BDC Appointment Helper for GHL';
 
         const controls = document.createElement('div');
         controls.id = 'hl-extractor-controls';
