@@ -599,13 +599,12 @@
 
     function generateCSV() {
         const history = GM_getValue(storageKey, []);
-        const headers = ['Timestamp', 'Type', 'Name', 'Phone', 'Date', 'Weekday', 'Time',
-                         'Looking For', 'Email', 'Source', 'Location'];
+        const headers = ['Type', 'Name', 'Phone', 'Date', 'Weekday', 'Time',
+                         'Looking For', 'Email', 'Source', 'Location', 'Timestamp'];
 
         const escapeCSV = str => `"${String(str).replace(/"/g, '""')}"`;
 
         const rows = history.map(entry => [
-            escapeCSV(entry.timestamp || new Date().toISOString()),
             escapeCSV(entry.type),
             escapeCSV(entry.name),
             escapeCSV(entry.phone),
@@ -615,7 +614,8 @@
             escapeCSV(entry.lookingFor),
             escapeCSV(entry.email),
             escapeCSV(entry.source),
-            escapeCSV(entry.location)
+            escapeCSV(entry.location),
+            escapeCSV(entry.timestamp || new Date().toISOString().slice(0, 10))
         ].join(','));
 
         return [headers.join(','), ...rows].join('\n');
