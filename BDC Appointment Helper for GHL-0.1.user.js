@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         BDC Appointment Helper for GHL
 // @namespace    https://github.com/joseponce8/BDC-appt-helper-for-GHL/releases
-// @version      0.1
-// @description  Extract contact information from HighLevel with daily CSV files and directory persistence
+// @version      0.1.2
+// @description  Extracts contact information from GoHighLevel with daily CSV files and directory persistence
 // @author       Jose Ponce
 // @match        https://app.gohighlevel.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=gohighlevel.com
@@ -12,7 +12,6 @@
 // @grant        GM_download
 // @grant        GM_addStyle
 // @grant        GM_addValueChangeListener
-// @run-at       context-menu
 // ==/UserScript==
 
 (function() {
@@ -23,13 +22,80 @@
     const directoryNameKey = 'directoryName';
     let directoryHandle = null;
 
+    const floatingBtn = document.createElement('button');
+    floatingBtn.id = 'bdc-helper-floating-btn';
+    floatingBtn.textContent = 'BDC Appt Helper📌';
+    document.body.appendChild(floatingBtn);
+
+    let isUIOpen = false;
+
+    function closeUI() {
+        const uiContainer = document.getElementById('hl-extractor-container');
+        if (uiContainer) {
+            document.body.removeChild(uiContainer);
+        }
+        isUIOpen = false;
+        floatingBtn.classList.remove('active');
+    }
+
+    floatingBtn.addEventListener('click', () => {
+        const uiContainer = document.getElementById('hl-extractor-container');
+
+        if (!isUIOpen) {
+            createUI();
+            isUIOpen = true;
+            floatingBtn.classList.add('active');
+        } else {
+            closeUI();
+        }
+    });
+
+    floatingBtn.addEventListener('click', () => {
+        floatingBtn.classList.toggle('active');
+    });
+
+    floatingBtn.addEventListener('click', () => {
+        floatingBtn.classList.toggle('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isUIOpen) closeUI();
+    });
+
     GM_addStyle(`
+
+        #bdc-helper-floating-btn {
+          position: fixed;
+          top: 10px;
+          left: 45vw;
+          padding: 10px 15px;
+          background-color: #2c3e50;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-weight: bold;
+          z-index: 9999;
+          transition: all 0.3s;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        #bdc-helper-floating-btn:hover {
+          background-color: #1a252f;
+        }
+        #bdc-helper-floating-btn.active {
+          background-color: #4CAF50;
+          color: white;
+        }
+
         #hl-extractor-container {
             position: fixed;
-            top: 100px;
-            left: 900px;
-            width: 600px;
-            min-height: 600px;
+            top: 10vh;
+            left: 30vw;
+            right: clamp(20px, 60cqw, 800px)
+            min-width: 400px;
+            max-width: 90vw;
+            min-height: 400px;
+            max-height: 90vh;
             background: white;
             border: 1px solid #ccc;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -141,19 +207,24 @@
     function extractContactInfo() {
         let contact = {};
         const nameElement1 = document.querySelector('h2.clamp-text.conversation-header-text');
-        const emailElement1 = document.querySelector('span.truncate-text > span.truncate-text');
-        const phoneElement1 = document.querySelectorAll('span.truncate-text > span.truncate-text')[1];
+        const phoneEmailElements = document.querySelectorAll('span.truncate-text > span.truncate-text');
 
-        if (nameElement1 || emailElement1 || phoneElement1) {
+        if (nameElement1 || phoneEmailElements.length > 0) {
             contact.name = nameElement1?.textContent.trim() || '';
-            contact.email = emailElement1?.textContent.trim() || '';
-            contact.phone = phoneElement1?.textContent.trim() || '';
+
+            if (phoneEmailElements.length === 1) {
+                contact.phone = phoneEmailElements[0]?.textContent.trim() || '';
+                contact.email = '';
+            } else {
+                contact.phone = phoneEmailElements[1]?.textContent.trim() || '';
+                contact.email = phoneEmailElements[0]?.textContent.trim() || '';
+            }
         } else {
             const firstName = document.querySelector('input[name="contact.first_name"]')?.value.trim() || '';
             const lastName = document.querySelector('input[name="contact.last_name"]')?.value.trim() || '';
             contact.name = [firstName, lastName].filter(Boolean).join(' ');
-            contact.email = document.querySelector('input[name="contact.email"]')?.value.trim() || '';
             contact.phone = document.querySelector('input[name="contact.phone"]')?.value.trim() || '';
+            contact.email = document.querySelector('input[name="contact.email"]')?.value.trim() || '';
         }
         return contact;
     }
@@ -176,7 +247,7 @@
         return [city, state].filter(Boolean).join(', ');
     }
 
-    function createUI() {
+    async function createUI() {
         const container = document.createElement('div');
         container.id = 'hl-extractor-container';
 
@@ -185,7 +256,7 @@
 
         const title = document.createElement('div');
         title.id = 'hl-extractor-title';
-        title.textContent = 'BDC Appointment Helper for GHL';
+        title.textContent = 'BDC Appointment Helper for GHL📌';
 
         const controls = document.createElement('div');
         controls.id = 'hl-extractor-controls';
@@ -196,9 +267,9 @@
         minimizeBtn.onclick = () => container.style.height = '40px';
 
         const closeBtn = document.createElement('button');
-        closeBtn.textContent = '×';
+        closeBtn.textContent = 'X';
         closeBtn.title = 'Close';
-        closeBtn.onclick = () => document.body.removeChild(container);
+        closeBtn.onclick = closeUI;
 
         const directoryStatus = document.createElement('div');
         directoryStatus.id = 'hl-directory-status';
@@ -389,6 +460,7 @@
         const closeBtn2 = document.createElement('button');
         closeBtn2.id = 'hl-close-btn';
         closeBtn2.textContent = 'Close';
+        closeBtn2.addEventListener('click', closeUI);
 
         actionButtons.appendChild(saveBtn);
         actionButtons.appendChild(chooseDirBtn);
@@ -409,12 +481,10 @@
         saveBtn.addEventListener('click', async () => {
             await saveAndCopy();
         });
-        closeBtn2.addEventListener('click', () => document.body.removeChild(container));
 
         updatePreview();
         initDirectoryStatus(directoryStatus);
 
-        // Prompt for directory selection on startup if none exists
         setTimeout(() => {
             if (!GM_getValue(directoryStorageKey, false)) {
                 const confirmDir = confirm('Would you like to select a directory to save contact files?');
@@ -468,11 +538,6 @@
 
     async function saveAndCopy() {
         const formData = collectFormData();
-
-        //if (!validateForm(formData)) {
-            //alert('Please complete required fields: Name, Phone, and Appointment Type');
-            //return;
-        //}
 
         const history = GM_getValue(storageKey, []);
         history.push({
@@ -535,7 +600,7 @@
     function generateCSV() {
         const history = GM_getValue(storageKey, []);
         const headers = ['Timestamp', 'Type', 'Name', 'Phone', 'Date', 'Weekday', 'Time',
-                       'Looking For', 'Email', 'Source', 'Location'];
+                         'Looking For', 'Email', 'Source', 'Location'];
 
         const escapeCSV = str => `"${String(str).replace(/"/g, '""')}"`;
 
@@ -557,7 +622,7 @@
     }
 
     function validateForm(data) {
-        //return data.name && data.phone && data.type;
+
     }
 
     async function saveToDirectory(fileName, content) {
@@ -603,5 +668,4 @@
         }
     }
 
-    createUI();
 })();
