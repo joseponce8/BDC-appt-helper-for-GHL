@@ -11,12 +11,12 @@ https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmp
 
 2.- Instalar el UserScript:
 https://github.com/joseponce8/BDC-appt-helper-for-GHL/releases/download/v0.1.2/BDC.Appointment.Helper.for.GHL-0.1.2.user.js
-
+![image](https://github.com/user-attachments/assets/84abac38-4644-47ce-97df-4bf42d8aaa39)
 3.- Para ejecutar el UserScript:
 Clic al boton BDC Appt Helper📌
 
 ![image](https://github.com/user-attachments/assets/49823e56-2269-472d-9b8c-3a732739b3c8)
-![image](https://github.com/user-attachments/assets/84abac38-4644-47ce-97df-4bf42d8aaa39)
+
 Toda la informacion relevante sera llenada automaticamente. 
 Completar informacion faltante como fecha y Hora segun haga falta.
 
