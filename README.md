@@ -10,7 +10,7 @@ https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmp
 ![image](https://github.com/user-attachments/assets/3387829c-22e8-4a47-98e2-29a11308d133)
 
 2.- Instalar el UserScript:
-https://github.com/joseponce8/BDC-appt-helper-for-GHL/releases/download/release/BDC.Appointment.Helper.for.GHL-0.1.user.js
+[https://github.com/joseponce8/BDC-appt-helper-for-GHL/releases/download/release/BDC.Appointment.Helper.for.GHL-0.1.user.js](https://github.com/joseponce8/BDC-appt-helper-for-GHL/releases/download/v0.1.2/BDC.Appointment.Helper.for.GHL-0.1.2.user.js)
 ![image](https://github.com/user-attachments/assets/84abac38-4644-47ce-97df-4bf42d8aaa39)
 
 3.- Para ejecutar el UserScript:
