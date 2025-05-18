@@ -14,54 +14,6 @@
 // @grant        GM_addValueChangeListener
 // ==/UserScript==
 
-(function() {
-    'use strict';
-
-    const storageKey = 'contactHistory';
-    const directoryStorageKey = 'selectedDirectory';
-    const directoryNameKey = 'directoryName';
-    let directoryHandle = null;
-
-    const floatingBtn = document.createElement('button');
-    floatingBtn.id = 'bdc-helper-floating-btn';
-    floatingBtn.textContent = 'BDC Appt Helper📌';
-    document.body.appendChild(floatingBtn);
-
-    let isUIOpen = false;
-
-    function closeUI() {
-        const uiContainer = document.getElementById('hl-extractor-container');
-        if (uiContainer) {
-            document.body.removeChild(uiContainer);
-        }
-        isUIOpen = false;
-        floatingBtn.classList.remove('active');
-    }
-
-    floatingBtn.addEventListener('click', () => {
-        const uiContainer = document.getElementById('hl-extractor-container');
-
-        if (!isUIOpen) {
-            createUI();
-            isUIOpen = true;
-            floatingBtn.classList.add('active');
-        } else {
-            closeUI();
-        }
-    });
-
-    floatingBtn.addEventListener('click', () => {
-        floatingBtn.classList.toggle('active');
-    });
-
-    floatingBtn.addEventListener('click', () => {
-        floatingBtn.classList.toggle('active');
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isUIOpen) closeUI();
-    });
-
     GM_addStyle(`
 
         #bdc-helper-floating-btn {
@@ -203,6 +155,54 @@
             margin-left: 10px;
         }
     `);
+
+(function() {
+    'use strict';
+
+    const storageKey = 'contactHistory';
+    const directoryStorageKey = 'selectedDirectory';
+    const directoryNameKey = 'directoryName';
+    let directoryHandle = null;
+
+    const floatingBtn = document.createElement('button');
+    floatingBtn.id = 'bdc-helper-floating-btn';
+    floatingBtn.textContent = 'BDC Appt Helper📌';
+    document.body.appendChild(floatingBtn);
+
+    let isUIOpen = false;
+
+    function closeUI() {
+        const uiContainer = document.getElementById('hl-extractor-container');
+        if (uiContainer) {
+            document.body.removeChild(uiContainer);
+        }
+        isUIOpen = false;
+        floatingBtn.classList.remove('active');
+    }
+
+    floatingBtn.addEventListener('click', () => {
+        const uiContainer = document.getElementById('hl-extractor-container');
+
+        if (!isUIOpen) {
+            createUI();
+            isUIOpen = true;
+            floatingBtn.classList.add('active');
+        } else {
+            closeUI();
+        }
+    });
+
+    floatingBtn.addEventListener('click', () => {
+        floatingBtn.classList.toggle('active');
+    });
+
+    floatingBtn.addEventListener('click', () => {
+        floatingBtn.classList.toggle('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isUIOpen) closeUI();
+    });
 
     function extractContactInfo() {
         let contact = {};
